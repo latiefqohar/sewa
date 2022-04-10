@@ -27,21 +27,26 @@
             </div>
             <div class="col-lg-6 col-sm-16 col-xs-12">
                 <label> Bukti Pembayaran</label>
+                <div class="form-group">
                 <?php if($tagihan['bukti_pembayaran']== null){ ?>
                     <img src="<?= base_url('assets/img/noimage.png'); ?>"  width ="300px" alt="">
                 <?php }else { ?>
                     <img src="<?= base_url('uploads/'.$tagihan['bukti_pembayaran']); ?>"  width ="300px" alt="">
                  <?php  } ?>
-
-                <div class="form-group">
+                </div>
+                <form action="" method="POST">
+                    <div class="form-group">
                         <label for="tipe_tagihan">Update Tagihan</label>
-                        <select name="update_tagihan" class="form-control">
+                        <select name="status" class="form-control" required>
                             <option value="">Silahkan Pilih</option>
                             <option value="Lunas">Lunas</option>
-                            <option value="Belum Lunas">Lunas</option>
+                            <option value="Belum Lunas">Belum Lunas</option>
                         </select>
                     </div>
-              
+                    <div class="form-group float-right">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
