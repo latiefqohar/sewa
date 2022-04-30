@@ -37,15 +37,17 @@ class Sewa extends CI_Controller {
 
     public function aksi_tambah(){
         $post = $this->input->post();
-        
+        $password = $this->passwordRandom();
         $data_penyewa = array(
             "nama"=>$post['nama'],
+            "no_unit"=>$post['no_unit'],
+            "no_telpon"=>$post['no_telpon'],
             "email"=>$post['email'],
             "nik"=>$post['nik'],
             "tanggal_lahir"=>$post['tanggal_lahir'],
             "tipe_sewa" => $post['tipe_sewa'],
             "harga_sewa" => $post['harga_sewa'],
-            "password" => $this->passwordRandom()
+            "password" => $password
         );
         
         $this->main_model->insert_data($data_penyewa,'penyewa');
@@ -58,7 +60,16 @@ class Sewa extends CI_Controller {
             "tipe_tagihan"=>$post['tipe_sewa']
         );
 
+        $data_user = array(
+            'email'=>$post['email'],
+            'nama'=>$post['nama'],
+            "password" => md5($password),
+            "role"=>"penyewa",
+            "id_penyewa"=>$id_penyewa
+        );
+
         $this->main_model->insert_data($data_tagihan,'tagihan');
+        $this->main_model->insert_data($data_user,'user');
 
         
         redirect('sewa/selesai/'.$id_penyewa,'refresh');

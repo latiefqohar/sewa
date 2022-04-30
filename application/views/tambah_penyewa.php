@@ -9,9 +9,19 @@
         <div class="row">
             <div class="col-lg-12 col-sm-12 col-xs-12">
                 <form action="<?= base_url('sewa/aksi_tambah'); ?>" method="POST">
+                    
+                    <div class="form-group">
+                        <label for="no_unit">No Unit</label>
+                        <input type="text" class="form-control" name="no_unit" placeholder="Masukkan No Unit" required>
+                    </div>
+                    
                     <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text" class="form-control" name="nama" placeholder="Masukkan nama" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="no_telpon">No Telpon</label>
+                        <input type="number" class="form-control" name="no_telpon" placeholder="0854141xxx" required>
                     </div>
                     <div class="form-group">
                         <label for="email">email</label>

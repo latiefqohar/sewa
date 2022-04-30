@@ -44,6 +44,24 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Foto KTP</h3>
+                <?php if($data_penyewa['foto_ktp']== null){ ?>
+                    <img src="<?= base_url('assets/img/noimage.png'); ?>"  width ="300px" alt="">
+                <?php }else { ?>
+                    <img src="<?= base_url('uploads/'.$data_penyewa['foto_ktp']); ?>"  width ="300px" alt="">
+                <?php  } ?>
+            </div>
+            <div class="col-lg-6">
+                <h3>Foto Profil</h3>
+                <?php if($data_penyewa['foto_profil']== null){ ?>
+                    <img src="<?= base_url('assets/img/noimage.png'); ?>"  width ="300px" alt="">
+                <?php }else { ?>
+                    <img src="<?= base_url('uploads/'.$data_penyewa['foto_profil']); ?>"  width ="300px" alt="">
+                <?php  } ?>
+            </div>
+        </div>
     </div>
 
 </div>

@@ -5,6 +5,7 @@
         <h6 class="m-0 font-weight-bold text-primary">List Penyewa</h6>
     </div>
     <div class="card-body">
+        <a href="<?= base_url("sewa/tambah"); ?>" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Tambah</a>
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>

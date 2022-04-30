@@ -3,15 +3,16 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Tagihan extends CI_Controller {
+class Tagihan_saya extends CI_Controller {
 
     public function index()
     {
-        $tagihan = $this->db->query("SELECT penyewa.nama,tagihan.* from tagihan join penyewa on tagihan.id_penyewa = penyewa.id")->result();
+        $my_id = $this->session->userdata("id_penyewa");
+        $tagihan = $this->db->query("SELECT penyewa.nama,tagihan.* from tagihan join penyewa on tagihan.id_penyewa = penyewa.id where id_penyewa=".$my_id)->result();
         $data['data_tagihan'] = $tagihan;
 
         $this->load->view('template/header');
-        $this->load->view('list_tagihan', $data);
+        $this->load->view('list_tagihan_saya', $data);
         $this->load->view('template/footer');
     }
 
@@ -27,14 +28,35 @@ class Tagihan extends CI_Controller {
 
     public function detail($id){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-           $status = $this->input->post("status");
-           $this->main_model->update_data(['id'=>$id],['status_bayar'=>$status],'tagihan');
+        
+            $my_id = $this->session->userdata("id_penyewa");
+            $id_tagihan = $this->input->post('id_tagihan');
+            
+
+            // the user id contain dot, so we must remove it
+		$config['upload_path']          = './uploads/';
+		$config['allowed_types']        = 'gif|jpg|jpeg|png';
+		$config['overwrite']            = true;
+		$config['max_size']             = 1024; // 1MB
+		$config['max_width']            = 1080;
+		$config['max_height']           = 1080;
+        $config['encrypt_name'] = TRUE;
+
+		$this->load->library('upload', $config);
+
+        if(! $this->upload->do_upload('file')) {
+            $this->session->set_flashdata('msg','swal("Eror!", "'. $this->upload->display_errors().'", "error");');
+        } else {
+            $upload_data = array('uploads' =>$this->upload->data());
+            $file_name = $upload_data['uploads']['file_name'];
+        }
+           $this->main_model->update_data(['id'=>$id_tagihan],['bukti_pembayaran'=>$file_name],'tagihan');
            $this->session->set_flashdata("msg",'swal("Sukses!", "Pembayaran berhasil diupdate!", "success");');
         }
         $tagihan = $this->main_model->find_data(['id'=>$id],'tagihan')->row_array();
         $data['tagihan'] = $tagihan;
         $this->load->view('template/header');
-        $this->load->view('detail_tagihan', $data);
+        $this->load->view('detail_tagihan_saya', $data);
         $this->load->view('template/footer');
     }
 
