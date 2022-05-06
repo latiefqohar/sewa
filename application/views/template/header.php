@@ -23,7 +23,21 @@
 
     <!-- Custom styles for this page -->
     <link href="<?= base_url('assets/vendor/'); ?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+    
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- Page level plugins -->
+    <script src="<?= base_url('assets/vendor/'); ?>datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url('assets/vendor/'); ?>datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet"> -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
 
 </head>
 
@@ -40,7 +54,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Dashboard Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Dashboard Admin</div>
             </a>
 
             <!-- Divider -->
@@ -53,23 +67,20 @@
                     <span>Dashboard</span></a>
             </li>
 
-           
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
             <?php if($this->session->userdata('role')=="penyewa"){ ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url("tagihan_saya"); ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-money-bill"></i>
                     <span>Tagihan Saya</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url("keluhan_saya"); ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-bullhorn"></i>
                     <span>Keluhan Saya</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url("profil"); ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-user"></i>
                     <span>Profil</span></a>
             </li>
             <?php }else{ ?>
@@ -80,28 +91,38 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Addons
+                Main Menu
             </div>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url("sewa"); ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-user"></i>
                     <span>List Penyewa</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url("keluhan"); ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fa fa-list-alt"></i>
                     <span>List Keluhan</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url("tagihan"); ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-money-bill"></i>
                     <span>List Tagihan</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url("tagihan/menunggu_verifikasi"); ?>">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-check-double"></i>
                     <span>Verifikasi Pembayaran</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url("laporan"); ?>">
+                    <i class="fa fa-list-alt"></i>
+                    <span>Laporan Pembayaran</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url("user"); ?>">
+                    <i class="fas fa-users"></i>
+                    <span>User</span></a>
             </li>
 
 
@@ -173,17 +194,9 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item"  href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
+                                    Ubah Password
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="<?= base_url("login/logout"); ?>" >

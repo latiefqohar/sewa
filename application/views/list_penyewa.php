@@ -28,7 +28,14 @@
                             <td>
                                <?= $penyewa->status; ?>
                             </td>
-                            <td><a href="<?= base_url("sewa/detail/".$penyewa->id) ?>" class="btn btn-primary"><i class="fa fa-eye"></i> Lihat Detail</a></td>
+                            <td>
+                            <?php if($penyewa->status == "Aktif"){?>
+                            <a href="<?= base_url("sewa/nonaktifkan/".$penyewa->id) ?>" class="btn btn-danger"><i class="fas fa-user-slash"></i> Nonaktifkan</a>
+                            <?php }else{ ?>
+                                <a href="<?= base_url("sewa/aktifkan/".$penyewa->id) ?>" class="btn btn-success"><i class="fas fa-user-slash"></i> Aktifkan</a>
+                            <?php } ?>
+                            <a href="<?= base_url("sewa/detail/".$penyewa->id) ?>" class="btn btn-primary"><i class="fa fa-eye"></i> Lihat Detail</a>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>

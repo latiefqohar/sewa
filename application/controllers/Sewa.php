@@ -5,6 +5,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Sewa extends CI_Controller {
 
+    public function __construct()
+    {
+        parent::__construct();
+        if (!$this->session->userdata('id')) {
+           redirect('login','refresh');
+         }
+    }
+
     public function index()
     {
         $data_penyewa = $this->main_model->get_data('penyewa')->result();
@@ -90,6 +98,23 @@ class Sewa extends CI_Controller {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function nonaktifkan($id){
+        $this->main_model->update_data(['id'=>$id],['status'=>'Tidak Aktif'],'penyewa');
+        $this->main_model->update_data(['id_penyewa'=>$id],['status'=>'Tidak Aktif'],'user');
+        $this->session->set_flashdata("msg",'swal("Sukses!", "Status berhasil diupdate!", "success");');
+        
+        redirect('Sewa','refresh');
+        
+    }
+
+    public function aktifkan($id){
+        $this->main_model->update_data(['id'=>$id],['status'=>'Aktif'],'penyewa');
+        $this->main_model->update_data(['id_penyewa'=>$id],['status'=>'Aktif'],'user');
+        $this->session->set_flashdata("msg",'swal("Sukses!", "Status berhasil diupdate!", "success");');
+        
+        redirect('Sewa','refresh');
     }
 
 }

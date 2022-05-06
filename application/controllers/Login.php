@@ -14,7 +14,8 @@ class Login extends CI_Controller {
         $post = $this->input->post();
         $data = array(
             "email"=>$post['email'],
-            "password"=>md5($post['password'])
+            "password"=>md5($post['password']),
+            "status"=>'Aktif'
         );
 
         $cek = $this->main_model->find_data($data,"user")->num_rows();
@@ -33,9 +34,17 @@ class Login extends CI_Controller {
     public function logout(){
         
         $this->session->sess_destroy();
-        
+
         redirect('login','refresh');
         
+    }
+
+    public function update_password(){
+        $id = $this->session->userdata('id');
+        $password = md5($this->input->post('password'));
+        $this->main_model->update_data(['id'=>$id],["password"=>$password],"user");
+        $this->session->set_flashdata("msg",'swal("Gagal!", "Password berhasil diubah!", "success");');
+        redirect('dashboard','refresh');
     }
 
 }

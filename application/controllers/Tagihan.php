@@ -5,6 +5,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Tagihan extends CI_Controller {
 
+    public function __construct()
+    {
+        parent::__construct();
+        if (!$this->session->userdata('id')) {
+           redirect('login','refresh');
+         }
+    }
+
     public function index()
     {
         $tagihan = $this->db->query("SELECT penyewa.nama,tagihan.* from tagihan join penyewa on tagihan.id_penyewa = penyewa.id")->result();

@@ -4,6 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Keluhan extends CI_Controller {
 
+    public function __construct()
+    {
+        parent::__construct();
+        if (!$this->session->userdata('id')) {
+           redirect('login','refresh');
+         }
+    }
+
     public function index()
     {
         $keluhan = $this->db->query("SELECT penyewa.nama,keluhan.* from keluhan join penyewa on keluhan.id_penyewa = penyewa.id")->result();
