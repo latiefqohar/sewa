@@ -55,7 +55,8 @@ class Sewa extends CI_Controller {
             "tanggal_lahir"=>$post['tanggal_lahir'],
             "tipe_sewa" => $post['tipe_sewa'],
             "harga_sewa" => $post['harga_sewa'],
-            "password" => $password
+            "password" => $password,
+            "alamat_unit" =>  $post['alamat_unit']
         );
         
         $this->main_model->insert_data($data_penyewa,'penyewa');

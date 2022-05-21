@@ -44,6 +44,7 @@ CREATE TABLE `penyewa` (
   `selesai_sewa` date DEFAULT NULL,
   `lengkap` varchar(30) DEFAULT 'Tidak',
   `status` varchar(100) NOT NULL DEFAULT 'Aktif',
+  `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -77,4 +78,4 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `id_penyewa`, `email`, `password`, `nama`, `role`, `status`) VALUES
 (4,	33,	'admin@admin.com',	'21232f297a57a5a743894a0e4a801fc3',	'admin',	'admin',	'Aktif');
 
--- 2022-05-21 07:38:48
+-- 2022-05-21 09:04:15

@@ -14,7 +14,10 @@
                         <label for="no_unit">No Unit</label>
                         <input type="text" class="form-control" name="no_unit" placeholder="Masukkan No Unit" required>
                     </div>
-                    
+                    <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" class="form-control" name="alamat_unit" placeholder="Masukkan Alamat Unit" required>
+                    </div>
                     <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text" class="form-control" name="nama" placeholder="Masukkan nama" required>

@@ -41,7 +41,8 @@
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <center>
-                                        <img src="<?= base_url("assets/img/logo-rumah.png"); ?>" alt="" width="300px">
+                                        <img src="<?= base_url("assets/logo.jpeg"); ?>" alt="" width="150px">
+                                        <h2>Kontrakan Arum</h2><br>
                                     </center>
                                   
                                     <div class="text-center">
