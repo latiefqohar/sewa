@@ -12,7 +12,7 @@
                     
                     <div class="form-group">
                         <label for="nama">Nama</label>
-                        <input type="text" name="id" value="<?= $user['id']; ?>">
+                        <input type="hidden" name="id" value="<?= $user['id']; ?>">
                         <input type="text" class="form-control" name="nama" value="<?= $user['nama']; ?>" placeholder="Masukkan Nama" required>
                     </div>
                     

@@ -43,6 +43,12 @@ class User extends CI_Controller {
 
     public function aksi_tambah(){
         $post = $this->input->post();
+        $cek = $this->db->get_where('user', array('email' => $id))->num_rows(); 
+        if ($cek > 0) {
+            $this->session->set_flashdata("msg",'swal("Sukses!", "Email terdaftar!", "error");');
+            redirect('user','refresh');
+        }
+
         $data = array(
             'email'=>$post['email'],
             'password' => md5($post['password']),
