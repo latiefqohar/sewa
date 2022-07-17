@@ -20,8 +20,9 @@ function rupiah($angka){
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>ID Tagihan</th>
                         <th>Nama</th>
+                        <th>Unit</th>
                         <th>Tanggal Tagihan</th>
                         <th>Total</th>
                         <th>Status</th>
@@ -33,6 +34,7 @@ function rupiah($angka){
                         <tr>
                             <td><?= $tagihan->id; ?></td>
                             <td><?= $tagihan->nama; ?></td>
+                            <td><?= $tagihan->no_unit; ?></td>
                             <td><?= $tagihan->tanggal_tagihan; ?></td>
                             <td><?= rupiah($tagihan->total_tagihan); ?></td>
                             <td>

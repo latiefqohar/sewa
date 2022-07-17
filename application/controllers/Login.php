@@ -43,7 +43,7 @@ class Login extends CI_Controller {
         $id = $this->session->userdata('id');
         $password = md5($this->input->post('password'));
         $this->main_model->update_data(['id'=>$id],["password"=>$password],"user");
-        $this->session->set_flashdata("msg",'swal("Gagal!", "Password berhasil diubah!", "success");');
+        $this->session->set_flashdata("msg",'swal("Sukses!", "Password berhasil diubah!", "success");');
         redirect('dashboard','refresh');
     }
 

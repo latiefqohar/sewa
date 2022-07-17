@@ -30,14 +30,14 @@
                     <input type="text" class="form-control" id="no_unit" value="<?= $data_penyewa['no_unit']; ?>"
                         readonly>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="mulai_sewa">Tanggal mulai sewa</label>
                     <input type="date" class="form-control" id="mulai_sewa" value="<?= $data_penyewa['mulai_sewa']; ?>" readonly>
                 </div>
                 <div class="form-group">
                     <label for="selesai_sewa">Tanggal Selesai Sewa</label>
                     <input type="date" class="form-control" id="selesai_sewa" value="<?= $data_penyewa['selesai_sewa']; ?>" readonly>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label for="status">Status</label>
                     <input type="text" class="form-control" id="status" value="<?= $data_penyewa['status']; ?>" readonly>
