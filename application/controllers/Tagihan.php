@@ -25,7 +25,7 @@ class Tagihan extends CI_Controller {
 
     public function menunggu_verifikasi()
     {
-        $tagihan = $this->db->query("SELECT penyewa.nama,tagihan.* from tagihan join penyewa on tagihan.id_penyewa = penyewa.id where bukti_pembayaran != '' and status_bayar='Belum Lunas'")->result();
+        $tagihan = $this->db->query("SELECT penyewa.nama,penyewa.no_unit,tagihan.* from tagihan join penyewa on tagihan.id_penyewa = penyewa.id where bukti_pembayaran != '' and status_bayar='Belum Lunas'")->result();
         $data['data_tagihan'] = $tagihan;
 
         $this->load->view('template/header');

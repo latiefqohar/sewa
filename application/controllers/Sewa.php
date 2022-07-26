@@ -118,6 +118,20 @@ class Sewa extends CI_Controller {
         redirect('Sewa','refresh');
     }
 
+    public function update(){
+        $post= $this->input->post();
+        $data = array(
+            'nama' => $post['nama'],
+            'email' => $post['email'],
+            'nik' => $post['nik'],
+            'tanggal_lahir' => $post['tanggal_lahir'],
+            'no_unit' => $post['no_unit'],
+            'status' => $post['status'],
+        );
+        $this->main_model->update_data(['id'=>$post['id']],$data,'penyewa');
+        redirect('Sewa','refresh');
+    }
+
 }
 
 /* End of file Sewa.php */
