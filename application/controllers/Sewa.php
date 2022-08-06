@@ -38,49 +38,56 @@ class Sewa extends CI_Controller {
     }
 
     public function tambah(){
+        $data['unit'] = $this->main_model->get_data('kontrakan')->result();
         $this->load->view('template/header');
-        $this->load->view('tambah_penyewa');
+        $this->load->view('tambah_penyewa',$data);
         $this->load->view('template/footer');
     }
 
     public function aksi_tambah(){
         $post = $this->input->post();
         $password = $this->passwordRandom();
-        $data_penyewa = array(
-            "nama"=>$post['nama'],
-            "no_unit"=>$post['no_unit'],
-            "no_telpon"=>$post['no_telpon'],
-            "email"=>$post['email'],
-            "nik"=>$post['nik'],
-            "tanggal_lahir"=>$post['tanggal_lahir'],
-            "tipe_sewa" => $post['tipe_sewa'],
-            "harga_sewa" => $post['harga_sewa'],
-            "password" => $password,
-            "alamat_unit" =>  $post['alamat_unit']
-        );
-        
-        $this->main_model->insert_data($data_penyewa,'penyewa');
-        $id_penyewa = $this->db->insert_id();
+        $is_available = $this->main_model->find_data(['no_unit'=>$post['no_unit'],'status'=>'Aktif'],'penyewa')->num_rows();
 
-        $data_tagihan = array(
-            "id_penyewa" => $id_penyewa,
-            "tanggal_tagihan" => date("Y-m-d"),
-            "total_tagihan" => $post['harga_sewa'],
-            "tipe_tagihan"=>$post['tipe_sewa']
-        );
+        if ($is_available <1) {
+       
+            $data_penyewa = array(
+                "nama"=>$post['nama'],
+                "no_unit"=>$post['no_unit'],
+                "no_telpon"=>$post['no_telpon'],
+                "email"=>$post['email'],
+                "nik"=>$post['nik'],
+                "tanggal_lahir"=>$post['tanggal_lahir'],
+                "tipe_sewa" => $post['tipe_sewa'],
+                "harga_sewa" => $post['harga_sewa'],
+                "password" => $password,
+                "alamat_unit" =>  $post['alamat_unit']
+            );
+            
+            $this->main_model->insert_data($data_penyewa,'penyewa');
+            $id_penyewa = $this->db->insert_id();
 
-        $data_user = array(
-            'email'=>$post['email'],
-            'nama'=>$post['nama'],
-            "password" => md5($password),
-            "role"=>"penyewa",
-            "id_penyewa"=>$id_penyewa
-        );
+            $data_tagihan = array(
+                "id_penyewa" => $id_penyewa,
+                "tanggal_tagihan" => date("Y-m-d"),
+                "total_tagihan" => $post['harga_sewa'],
+                "tipe_tagihan"=>$post['tipe_sewa']
+            );
 
-        $this->main_model->insert_data($data_tagihan,'tagihan');
-        $this->main_model->insert_data($data_user,'user');
+            $data_user = array(
+                'email'=>$post['email'],
+                'nama'=>$post['nama'],
+                "password" => md5($password),
+                "role"=>"penyewa",
+                "id_penyewa"=>$id_penyewa
+            );
 
-        
+            $this->main_model->insert_data($data_tagihan,'tagihan');
+            $this->main_model->insert_data($data_user,'user');
+
+        }else{
+            $this->session->set_flashdata("msg",'swal("Gagal!", "Unit Terisi!", "error");');
+        }
         redirect('sewa/selesai/'.$id_penyewa,'refresh');
         
     }

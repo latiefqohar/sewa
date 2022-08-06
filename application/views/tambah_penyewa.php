@@ -12,7 +12,12 @@
                     
                     <div class="form-group">
                         <label for="no_unit">No Unit</label>
-                        <input type="text" class="form-control" name="no_unit" placeholder="Masukkan No Unit" required>
+                        <select name="no_unit" class="form-control" required>
+                            <option value="">Pilih Unit</option>
+                            <?php foreach($unit as $u){ ?>
+                                <option value="<?= $u->no_unit; ?>"><?= $u->no_unit; ?></option>
+                            <?php } ?>
+                            </select>
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat</label>

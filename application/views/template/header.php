@@ -95,6 +95,11 @@
             </div>
             <!-- Nav Item - Charts -->
             <li class="nav-item">
+                <a class="nav-link" href="<?= base_url("kontrakan"); ?>">
+                    <i class="fas fa-home"></i>
+                    <span>List Kontrakan</span></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<?= base_url("sewa"); ?>">
                     <i class="fas fa-user"></i>
                     <span>List Penyewa</span></a>

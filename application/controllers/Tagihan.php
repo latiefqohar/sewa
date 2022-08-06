@@ -22,6 +22,15 @@ class Tagihan extends CI_Controller {
         $this->load->view('list_tagihan', $data);
         $this->load->view('template/footer');
     }
+    public function tunggakan()
+    {
+        $tagihan = $this->db->query("SELECT penyewa.nama,penyewa.no_unit,tagihan.*, sum(tagihan.total_tagihan) as tunggakan from tagihan join penyewa on tagihan.id_penyewa = penyewa.id group by penyewa.no_unit")->result();
+        $data['data_tagihan'] = $tagihan;
+
+        $this->load->view('template/header');
+        $this->load->view('list_tunggakan', $data);
+        $this->load->view('template/footer');
+    }
 
     public function menunggu_verifikasi()
     {
